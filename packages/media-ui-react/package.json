@@ -1,0 +1,28 @@
+{
+  "name": "@fotoowl/media-ui-react",
+  "version": "0.1.0",
+  "description": "Pure headless UI for web media browsing: Grid (infinite scroll), Lightbox, Reel Swiper. No styles, no data fetching — only prop-getters.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.18",
+    "react": "^18.3.1",
+    "typescript": "^5.7.3"
+  },
+  "license": "MIT"
+}

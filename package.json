@@ -1,0 +1,24 @@
+{
+  "name": "foto-owl",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Headless media SDK ecosystem: framework-agnostic core, platform wrappers, pure-UI headless components, and a demo app backed by the Pexels API.",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace @fotoowl/media-core && npm run build --workspace @fotoowl/media-react && npm run build --workspace @fotoowl/media-ui-react",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspace @fotoowl/media-core",
+    "dev": "npm run dev --workspace @fotoowl/app",
+    "build:app": "npm run build --workspace @fotoowl/app",
+    "docs:site": "typedoc packages/media-core/src/index.ts --tsconfig packages/media-core/tsconfig.json --name \"media-core SDK\" --out packages/app/dist/docs/sdk && typedoc packages/media-ui-react/src/index.ts --tsconfig packages/media-ui-react/tsconfig.json --name \"media-ui-react components\" --out packages/app/dist/docs/components"
+  },
+  "engines": {
+    "node": ">=18.17"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "typedoc": "^0.28.20"
+  }
+}

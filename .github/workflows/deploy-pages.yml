@@ -1,0 +1,60 @@
+name: Deploy to GitHub Pages
+
+# Builds the web app plus the TypeDoc site for media-core (SDK) and
+# media-ui-react (components), then serves them all from one GitHub Pages site:
+#
+#   <user>.github.io/<repo>/                  -> the app
+#   <user>.github.io/<repo>/docs/sdk/         -> media-core API docs
+#   <user>.github.io/<repo>/docs/components/  -> media-ui-react API docs
+#
+# Requires one repository secret: PEXELS_API_KEY (the free Pexels API key).
+# Set it in Settings -> Secrets and variables -> Actions. The app still builds
+# without it, but media requests will fail until it's set.
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build SDK + wrappers
+        run: npm run build
+      - name: Build the web app
+        run: npm run build:app
+        env:
+          VITE_PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+      - name: Build SDK + components docs into the app output
+        run: npm run docs:site
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: packages/app/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment

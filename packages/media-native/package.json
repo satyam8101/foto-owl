@@ -1,0 +1,33 @@
+{
+  "name": "@fotoowl/media-native",
+  "version": "0.1.0",
+  "description": "React Native wrapper around @fotoowl/media-core. Same hook contract as @fotoowl/media-react, adapted to RN idioms (pull-to-refresh, onEndReached). No business logic.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.72.0"
+  },
+  "dependencies": {
+    "@fotoowl/media-core": "0.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.18",
+    "react": "^18.3.1",
+    "react-native": "^0.76.6",
+    "typescript": "^5.7.3"
+  },
+  "license": "MIT"
+}

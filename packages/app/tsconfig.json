@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "types": ["vite/client"],
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@fotoowl/media-core": ["../media-core/src/index.ts"],
+      "@fotoowl/media-react": ["../media-react/src/index.ts"],
+      "@fotoowl/media-ui-react": ["../media-ui-react/src/index.ts"]
+    }
+  },
+  "include": ["src"]
+}
